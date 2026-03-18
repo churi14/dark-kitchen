@@ -1,4 +1,3 @@
-// ─────────────────────────────────────────────────────────
 // lib/supabase/server.ts — Cliente para Server Components y API routes
 // ─────────────────────────────────────────────────────────
 import { createServerClient } from '@supabase/ssr'
