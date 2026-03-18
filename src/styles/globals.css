@@ -1,0 +1,66 @@
+/* ─────────────────────────────────────────────────────────
+   styles/globals.css — Variables de tema y reset base
+   ───────────────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── Tema oscuro (default) ───────────────────────────── */
+  :root, .dark {
+    --bg:          #0f0f0f;
+    --surface:     #1a1a1a;
+    --surface-2:   #242424;
+    --surface-3:   #2e2e2e;
+    --text:        #f0ede8;
+    --text-muted:  #666666;
+    --border:      #2a2a2a;
+    --accent:      #FF6B35;
+    --accent-dim:  rgba(255, 107, 53, 0.12);
+    --brolas:      #8b5cf6;
+    --brolas-dim:  rgba(139, 92, 246, 0.10);
+    --green:       #22c55e;
+    --green-dim:   rgba(34, 197, 94, 0.12);
+  }
+
+  /* ── Tema claro ──────────────────────────────────────── */
+  .light {
+    --bg:          #f5f3ef;
+    --surface:     #ffffff;
+    --surface-2:   #f0ede8;
+    --surface-3:   #e8e4dd;
+    --text:        #1a1a1a;
+    --text-muted:  #888888;
+    --border:      #e0dbd2;
+    --accent:      #FF6B35;
+    --accent-dim:  rgba(255, 107, 53, 0.08);
+    --brolas:      #8b5cf6;
+    --brolas-dim:  rgba(139, 92, 246, 0.07);
+    --green:       #16a34a;
+    --green-dim:   rgba(34, 197, 94, 0.08);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--bg);
+    color:            var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Scrollbar discreta */
+  ::-webkit-scrollbar       { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+}
+
+@layer utilities {
+  /* Ocultar scrollbar pero mantener scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+}
