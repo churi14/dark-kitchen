@@ -8,8 +8,8 @@ export default function StoreHeader() {
       <Image
         src="/logo.svg"
         alt="La Cocina Ushuaia"
-        width={200}
-        height={80}
+        width={300}
+        height={120}
         className="object-contain mb-2"
         priority
       />
