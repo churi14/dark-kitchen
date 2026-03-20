@@ -13,12 +13,12 @@ export default function StoreHeader() {
       <Image
         src="/logo.svg"
         alt="La Cocina Ushuaia"
-        width={300}
-        height={120}
+        width={280}
+        height={88}
         className="object-contain"
         priority
       />
-      <div className="flex items-center justify-center gap-5 mt-1">
+      <div className="flex items-center justify-center gap-5 mt-2">
         {BRAND_LOGOS.map(brand => (
           <div key={brand.slug} className="w-[70px] h-[70px] flex items-center justify-center">
             <Image
