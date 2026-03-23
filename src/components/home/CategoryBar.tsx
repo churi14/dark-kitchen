@@ -30,20 +30,22 @@ export default function CategoryBar({ active, onChange }: Props) {
             <div
               className={cn(
                 'w-[56px] h-[56px] rounded-[12px] flex items-center justify-center',
-                'border transition-all duration-200 overflow-hidden',
+                'border-2 transition-all duration-200',
                 active === brand.slug
                   ? 'border-accent bg-accent/10 scale-105'
                   : 'border-[var(--border)] bg-[var(--surface-2)]'
               )}
             >
               {logoSrc ? (
-                <Image
-                  src={logoSrc}
-                  alt={brand.name}
-                  width={44}
-                  height={44}
-                  className="object-contain w-full h-full p-1.5"
-                />
+                <div className="w-full h-full rounded-[10px] overflow-hidden flex items-center justify-center">
+                  <Image
+                    src={logoSrc}
+                    alt={brand.name}
+                    width={44}
+                    height={44}
+                    className="object-contain w-full h-full p-1.5"
+                  />
+                </div>
               ) : (
                 <span className="text-[22px]">{brand.emoji}</span>
               )}
