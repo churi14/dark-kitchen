@@ -32,13 +32,12 @@ export default function CategoryBar({ active, onChange }: Props) {
           >
             <div
               className={cn(
-                'w-[60px] h-[60px] rounded-[14px] flex items-center justify-center',
-                'transition-all duration-200',
+                'w-[60px] h-[60px] rounded-[14px] flex items-center justify-center transition-all duration-200',
                 isActive
-                  ? 'ring-2 ring-accent ring-offset-1 ring-offset-[var(--bg)] scale-105'
-                  : 'ring-1 ring-[var(--border)]'
+                  ? 'border-2 border-accent'
+                  : 'border-2 border-transparent'
               )}
-              style={config ? { backgroundColor: config.bg } : {}}
+              style={config ? { backgroundColor: config.bg } : { backgroundColor: 'var(--surface-2)' }}
             >
               {config ? (
                 <Image
