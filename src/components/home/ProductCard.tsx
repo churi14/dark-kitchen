@@ -1,5 +1,4 @@
 // components/home/ProductCard.tsx
-// Card individual de producto en el menú
 'use client'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -12,62 +11,59 @@ interface Props {
 }
 
 export default function ProductCard({ product }: Props) {
-  const router = useRouter()
+  const router  = useRouter()
   const addItem = useCart(s => s.addItem)
 
   function handleQuickAdd(e: React.MouseEvent) {
-    e.stopPropagation() // no navegar al detalle
+    e.stopPropagation()
     addItem(product, '')
   }
 
   return (
     <div
       onClick={() => router.push(`/producto/${product.id}`)}
-      className="flex gap-0 bg-[var(--surface-2)] rounded-card border border-[var(--border)]
-                 overflow-hidden cursor-pointer active:scale-[.98] transition-transform duration-150"
+      className="flex items-center gap-3 bg-[var(--surface)] rounded-[12px] border border-[var(--border)]
+                 p-3 cursor-pointer active:scale-[.98] transition-transform duration-150"
     >
-      {/* Imagen */}
-      <div className="w-[84px] h-[84px] flex-shrink-0 bg-[var(--surface-3)] flex items-center justify-center relative overflow-hidden">
+      {/* Info — izquierda */}
+      <div className="flex-1 flex flex-col gap-1 min-w-0">
+        <p className="text-[15px] font-semibold text-[var(--text)] leading-tight">
+          {product.name}
+        </p>
+        {product.description && (
+          <p className="text-[12px] text-[var(--text-muted)] leading-relaxed line-clamp-2">
+            {product.description}
+          </p>
+        )}
+        <div className="flex items-center justify-between mt-1">
+          <span className="font-display text-[15px] font-bold text-accent">
+            {formatPrice(product.price)}
+          </span>
+          <button
+            onClick={handleQuickAdd}
+            className="w-7 h-7 bg-accent rounded-full text-white text-[18px]
+                       flex items-center justify-center leading-none active:scale-90 transition-transform"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      {/* Foto — derecha */}
+      <div className="w-[90px] h-[90px] flex-shrink-0 rounded-[10px] overflow-hidden bg-[var(--surface-2)] relative">
         {product.image_url ? (
           <Image
             src={productImageUrl(product.image_url)}
             alt={product.name}
             fill
             className="object-cover"
-            sizes="84px"
+            sizes="90px"
           />
         ) : (
-          <span className="text-2xl opacity-40">🍽️</span>
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-3xl opacity-20">🍽️</span>
+          </div>
         )}
-      </div>
-
-      {/* Info */}
-      <div className="flex-1 flex flex-col justify-between p-2.5 pl-3">
-        <div>
-          <p className="text-[13px] font-semibold text-[var(--text)] leading-tight">
-            {product.name}
-          </p>
-          {product.description && (
-            <p className="text-[11px] text-[var(--text-muted)] mt-1 leading-relaxed line-clamp-2">
-              {product.description}
-            </p>
-          )}
-        </div>
-
-        <div className="flex items-center justify-between mt-2">
-          <span className="font-display text-[15px] font-bold text-accent">
-            {formatPrice(product.price)}
-          </span>
-
-          {/* Botón + rápido */}
-          <button
-            onClick={handleQuickAdd}
-            className="w-[30px] h-[30px] bg-accent rounded-[8px] text-white text-[18px]
-                       flex items-center justify-center leading-none active:scale-90 transition-transform"
-          >
-            +
-          </button>
-        </div>
       </div>
     </div>
   )

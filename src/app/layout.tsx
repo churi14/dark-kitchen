@@ -43,8 +43,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className="dark" suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${syne.variable} font-sans bg-[#0f0f0f] text-[#f0ede8] antialiased`} suppressHydrationWarning>
+    <html lang="es" className="light" suppressHydrationWarning>
+      <body className={`${dmSans.variable} ${syne.variable} font-sans bg-[#f5f3ef] text-[#1a1a1a] antialiased`} suppressHydrationWarning>
         {children}
         <Toaster
           position="bottom-center"

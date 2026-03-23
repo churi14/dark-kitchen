@@ -8,7 +8,6 @@ import SearchBar        from '@/components/home/SearchBar'
 import CategoryBar      from '@/components/home/CategoryBar'
 import ProductCard      from '@/components/home/ProductCard'
 import CartBar          from '@/components/home/CartBar'
-import ThemeToggle      from '@/components/shared/ThemeToggle'
 import { BRANDS }       from '@/constants'
 import type { Product, BrandSlug } from '@/types'
 
@@ -50,11 +49,6 @@ export default function MenuPage() {
   return (
     <main className="min-h-screen bg-[var(--bg)]">
       <div className="max-w-[430px] mx-auto">
-
-        {/* Toggle de tema arriba a la derecha */}
-        <div className="flex justify-end px-5 pt-3">
-          <ThemeToggle />
-        </div>
 
         <StoreHeader />
 
