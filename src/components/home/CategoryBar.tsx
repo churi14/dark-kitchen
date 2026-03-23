@@ -5,10 +5,11 @@ import { cn } from '@/lib/utils'
 import { BRANDS } from '@/constants'
 import type { BrandSlug } from '@/types'
 
-const BRAND_LOGO_MAP: Partial<Record<BrandSlug, string>> = {
-  lomito:   '/logo-lomito.svg',
-  burger:   '/logo-burger.svg',
-  milanesa: '/logo-milanesa.svg',
+// Colores de fondo propios de cada marca para que el logo blanco se vea
+const BRAND_CONFIG: Partial<Record<BrandSlug, { logo: string; bg: string }>> = {
+  lomito:   { logo: '/logo-lomito.svg',   bg: '#1a1a1a' },
+  burger:   { logo: '/logo-burger.svg',   bg: '#1a1a1a' },
+  milanesa: { logo: '/logo-milanesa.svg', bg: '#1a1a1a' },
 }
 
 interface Props {
@@ -20,7 +21,9 @@ export default function CategoryBar({ active, onChange }: Props) {
   return (
     <div className="flex gap-3 overflow-x-auto scrollbar-hide px-5 pb-4">
       {BRANDS.map(brand => {
-        const logoSrc = BRAND_LOGO_MAP[brand.slug]
+        const config = BRAND_CONFIG[brand.slug]
+        const isActive = active === brand.slug
+
         return (
           <button
             key={brand.slug}
@@ -29,30 +32,30 @@ export default function CategoryBar({ active, onChange }: Props) {
           >
             <div
               className={cn(
-                'w-[56px] h-[56px] rounded-[12px] flex items-center justify-center',
-                'border-2 transition-all duration-200',
-                active === brand.slug
-                  ? 'border-accent bg-accent/10 scale-105'
-                  : 'border-[var(--border)] bg-[var(--surface-2)]'
+                'w-[60px] h-[60px] rounded-[14px] flex items-center justify-center',
+                'transition-all duration-200',
+                isActive
+                  ? 'ring-2 ring-accent ring-offset-1 ring-offset-[var(--bg)] scale-105'
+                  : 'ring-1 ring-[var(--border)]'
               )}
+              style={config ? { backgroundColor: config.bg } : {}}
             >
-              {logoSrc ? (
-                <div className="w-full h-full rounded-[10px] overflow-hidden flex items-center justify-center">
-                  <Image
-                    src={logoSrc}
-                    alt={brand.name}
-                    width={44}
-                    height={44}
-                    className="object-contain w-full h-full p-1.5"
-                  />
-                </div>
+              {config ? (
+                <Image
+                  src={config.logo}
+                  alt={brand.name}
+                  width={48}
+                  height={48}
+                  className="object-contain p-2"
+                />
               ) : (
-                <span className="text-[22px]">{brand.emoji}</span>
+                <span className="text-[24px]">{brand.emoji}</span>
               )}
             </div>
+
             <span className={cn(
-              'text-[10px] font-semibold text-center max-w-[62px] leading-tight',
-              active === brand.slug ? 'text-[var(--text)]' : 'text-[var(--text-muted)]'
+              'text-[10px] font-semibold text-center max-w-[64px] leading-tight',
+              isActive ? 'text-accent font-bold' : 'text-[var(--text-muted)]'
             )}>
               {brand.slug === 'lomito'   ? 'Club Lomito' :
                brand.slug === 'burger'   ? 'Burger Club' :
