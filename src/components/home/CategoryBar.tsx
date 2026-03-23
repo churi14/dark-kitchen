@@ -5,11 +5,10 @@ import { cn } from '@/lib/utils'
 import { BRANDS } from '@/constants'
 import type { BrandSlug } from '@/types'
 
-// Colores de fondo propios de cada marca para que el logo blanco se vea
-const BRAND_CONFIG: Partial<Record<BrandSlug, { logo: string; bg: string }>> = {
-  lomito:   { logo: '/logo-lomito.svg',   bg: '#1a1a1a' },
-  burger:   { logo: '/logo-burger.svg',   bg: '#1a1a1a' },
-  milanesa: { logo: '/logo-milanesa.svg', bg: '#1a1a1a' },
+const BRAND_CONFIG: Partial<Record<BrandSlug, { logo: string }>> = {
+  lomito:   { logo: '/logo-lomito.svg'   },
+  burger:   { logo: '/logo-burger.svg'   },
+  milanesa: { logo: '/logo-milanesa.svg' },
 }
 
 interface Props {
@@ -19,45 +18,45 @@ interface Props {
 
 export default function CategoryBar({ active, onChange }: Props) {
   return (
-    <div className="flex gap-3 overflow-x-auto scrollbar-hide px-5 pb-4">
+    <div className="flex gap-3 overflow-x-auto scrollbar-hide px-5 pb-3">
       {BRANDS.map(brand => {
-        const config = BRAND_CONFIG[brand.slug]
+        const config  = BRAND_CONFIG[brand.slug]
         const isActive = active === brand.slug
 
         return (
           <button
             key={brand.slug}
             onClick={() => onChange(brand.slug)}
-            className="flex-shrink-0 flex flex-col items-center gap-1.5 cursor-pointer"
+            className="flex-shrink-0 flex flex-col items-center gap-1 cursor-pointer"
           >
+            {/* Ícono */}
             <div
               className={cn(
-                'w-[60px] h-[60px] rounded-[14px] flex items-center justify-center transition-all duration-200',
-                isActive
-                  ? 'border-2 border-accent'
-                  : 'border-2 border-transparent'
+                'w-[72px] h-[72px] rounded-[16px] flex items-center justify-center transition-all duration-200',
+                isActive ? 'border-2 border-accent' : 'border-2 border-transparent'
               )}
-              style={config ? { backgroundColor: config.bg } : { backgroundColor: 'var(--surface-2)' }}
+              style={{ backgroundColor: config ? '#ffffff' : 'var(--surface-2)' }}
             >
               {config ? (
                 <Image
                   src={config.logo}
                   alt={brand.name}
-                  width={48}
-                  height={48}
-                  className="object-contain p-2"
+                  width={60}
+                  height={60}
+                  className="object-contain p-1.5"
                 />
               ) : (
-                <span className="text-[24px]">{brand.emoji}</span>
+                <span className="text-[26px]">{brand.emoji}</span>
               )}
             </div>
 
+            {/* Label */}
             <span className={cn(
-              'text-[10px] font-semibold text-center max-w-[64px] leading-tight',
-              isActive ? 'text-accent font-bold' : 'text-[var(--text-muted)]'
+              'text-[10px] font-semibold text-center max-w-[72px] leading-tight',
+              isActive ? 'text-accent' : 'text-[var(--text-muted)]'
             )}>
-              {brand.slug === 'lomito'   ? 'Club Lomito' :
-               brand.slug === 'burger'   ? 'Burger Club' :
+              {brand.slug === 'lomito' ? 'Club Lomito' :
+               brand.slug === 'burger' ? 'Burger Club' :
                brand.name}
             </span>
           </button>
